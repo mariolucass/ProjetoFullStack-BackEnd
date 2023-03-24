@@ -2,18 +2,18 @@ import { AppError } from "../../errors/appError";
 import { Request, Response, NextFunction } from "express";
 import { contactRepository } from "../../utils/repositories";
 
-export const verifyContactNotExists = async (
+export const verifyContactOwner = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const contact = await contactRepository.findOneBy({
-    email: req.body.email,
+  const contact = await contactRepository.findOneByOrFail({
+    id: req.params.id,
   });
 
-  if (contact) {
-    throw new AppError("Contact already exists", 400);
+  if (req.user.id === contact.customer.id) {
+    return next();
   }
 
-  return next();
+  throw new AppError("Missing permissions", 401);
 };

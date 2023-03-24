@@ -1,6 +1,6 @@
 import { AppError } from "../../errors/appError";
-import { contactRepository } from "../../utils/repositories";
 import { Request, Response, NextFunction } from "express";
+import { contactRepository } from "../../utils/repositories";
 
 export const verifyContactExists = async (
   req: Request,

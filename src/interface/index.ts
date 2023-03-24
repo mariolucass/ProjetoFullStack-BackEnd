@@ -1,11 +1,17 @@
+export { ICustomerLogin } from "./session/session.interface";
+
 export {
   ICustomer,
-  ICustomerCreate,
+  ICustomerRequest,
   ICustomerUpdate,
+  ICustomerArray,
+  ICustomerReturn,
 } from "./customers/customer.interface";
 
 export {
   IContact,
-  IContactCreate,
+  IContactRequest,
   IContactUpdate,
+  IContactArray,
+  IContactReturn,
 } from "./contacts/contact.interface";

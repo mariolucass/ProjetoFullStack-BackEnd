@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { IContactUpdate, IContact } from "./../../interface";
+import * as services from "../../services";
 
 export const updateContactController = async (req: Request, res: Response) => {
-  //   const data: IContactUpdate = req.body;
-  //   const info: IContact = await {};
-  //   return res.status(200).json(info);
+  const data = [req.params.id, req.body];
+  const info = await services.updateContact(data[0], data[1]);
+
+  return res.status(200).json(info);
 };

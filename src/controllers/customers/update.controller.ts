@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { ICustomerUpdate, ICustomer } from "./../../interface";
+import * as services from "../../services";
 
 export const updateCustomerController = (req: Request, res: Response) => {
-  // const data: ICustomerUpdate = req.body;
-  // const info: ICustomer = "";
-  // return res.status(200).json(info);
+  const data = [req.params.id, req.body];
+  const info = services.updateCustomer(data[0], data[1]);
+
+  return res.status(200).json(info);
 };

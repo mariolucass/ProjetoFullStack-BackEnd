@@ -1,13 +1,43 @@
+import * as controllers from "../../controllers";
+import * as middlewares from "./../../middlewares";
+import * as contactsSchemas from "./../../schemas/contacts/contacts.schema";
+
 import { Router } from "express";
+export const contactRoutes = Router();
 
-export const userRoutes = Router();
+contactRoutes.post(
+  "/",
+  middlewares.verifyAuthPermissions,
+  middlewares.validateSchemaMiddleware(contactsSchemas.contactCreate),
+  controllers.createContactController
+);
 
-userRoutes.post("/");
+contactRoutes.get(
+  "/",
+  middlewares.verifyAuthPermissions,
+  controllers.listAllContactsController
+);
 
-userRoutes.get("/");
+contactRoutes.get(
+  "/:id",
+  middlewares.verifyAuthPermissions,
+  middlewares.verifyContactOwner,
+  middlewares.verifyContactExists
+);
 
-userRoutes.get("/:id");
+contactRoutes.patch(
+  "/:id",
+  middlewares.verifyAuthPermissions,
+  middlewares.verifyContactExists,
+  middlewares.verifyContactOwner,
+  middlewares.validateSchemaMiddleware(contactsSchemas.contactUpdate),
+  controllers.updateContactController
+);
 
-userRoutes.patch("/:id");
-
-userRoutes.delete("/:id");
+contactRoutes.delete(
+  "/:id",
+  middlewares.verifyAuthPermissions,
+  middlewares.verifyContactExists,
+  middlewares.verifyContactOwner,
+  controllers.deleteContactController
+);

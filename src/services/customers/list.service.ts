@@ -1,22 +1,21 @@
-import { IContact } from "./../../interface";
-import { contactReturn } from "./../../schemas/";
-import { Contact, Customer } from "../../entities";
 import { customerRepository } from "../../utils/repositories";
+import { customerReturn, customerArray } from "./../../schemas";
+import { ICustomerArray, ICustomerReturn } from "./../../interface";
 
-export const listAllCustomers = async (): Promise<Customer[]> => {
-  const customers = customerRepository.find();
+export const listAllCustomers = async (): Promise<ICustomerArray> => {
+  const customers = await customerRepository.find();
 
-  //   const returnContacts = await contactReturn.parse(contacts);
+  const returnCustomers = customerArray.parse(customers);
 
-  return customers;
+  return returnCustomers;
 };
 
 export const listCustomerById = async (
   customerId: string
-): Promise<Customer> => {
+): Promise<ICustomerReturn> => {
   const customer = await customerRepository.findOneByOrFail({ id: customerId });
 
-  //   const returnContacts = await contactReturn.parse(contacts);
+  const returnCustomer = customerReturn.parse(customer);
 
-  return customer;
+  return returnCustomer;
 };

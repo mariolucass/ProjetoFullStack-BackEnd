@@ -16,6 +16,4 @@ export const deleteContact = async (contactId: string): Promise<void> => {
   });
 
   await contactRepository.save(contactDeleted);
-
-  //   const returnContacts = await contactReturn.parse(contacts);
 };

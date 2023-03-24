@@ -1,9 +1,9 @@
 import "dotenv/config";
+import jwt from "jsonwebtoken";
 import { AppError } from "../../errors";
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
 
-export const ensureAuthPermissions = async (
+export const verifyAuthPermissions = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -20,7 +20,6 @@ export const ensureAuthPermissions = async (
     if (error) {
       throw new AppError(error.message, 400);
     }
-
     req.user = {
       id: decoded.sub,
       isActive: decoded.isActive,

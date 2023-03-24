@@ -1,25 +1,39 @@
-import { Contact } from "../../entities";
-import { IContact } from "./../../interface";
-import { contactReturn } from "./../../schemas/";
 import { contactRepository } from "../../utils/repositories";
+import { IContactArray, IContactReturn } from "./../../interface";
+import {
+  contactArray,
+  contactArrayOmitCustomer,
+  contactReturn,
+} from "./../../schemas";
 
-export const listAllContacts = async (): Promise<Contact[]> => {
-  const contacts = contactRepository.find();
+export const listAllContacts = async (): Promise<IContactArray> => {
+  const contacts = await contactRepository.find();
 
-  //   const returnContacts = await contactReturn.parse(contacts);
+  const returnContacts = contactArray.parse(contacts);
 
-  return contacts;
+  return returnContacts;
 };
 
-// export const listContactsByCustomer = async (
-//   customerId: string
-// ): Promise<Contact[]> => {
-//   const contacts = contactRepository.find({
-//     where: { customer.id: customerId },
-//     relations: {
-//       customer: true,
-//     },
-//   });
-//     const returnContacts = await contactReturn.parse(contacts);
-//   return contacts;
-// };
+export const listContactsByCustomer = async (
+  customerId: string
+): Promise<any> => {
+  const contacts = await contactRepository.findBy({
+    customer: {
+      id: customerId,
+    },
+  });
+
+  const returnContacts = contactArrayOmitCustomer.parse(contacts);
+
+  return returnContacts;
+};
+
+export const listContactsById = async (
+  contactId: string
+): Promise<IContactReturn> => {
+  const contact = await contactRepository.findOneByOrFail({ id: contactId });
+
+  const returnContacts = contactReturn.parse(contact);
+
+  return returnContacts;
+};

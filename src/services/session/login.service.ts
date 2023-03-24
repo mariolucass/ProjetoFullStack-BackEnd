@@ -2,11 +2,11 @@ import "dotenv/config";
 import jwt from "jsonwebtoken";
 import { compare } from "bcryptjs";
 import { AppError } from "../../errors/appError";
-import { ICustomerCreate } from "./../../interface";
+import { ICustomerLogin } from "./../../interface";
 import { customerRepository } from "./../../utils/repositories/index";
 
-export const loginUser = async (
-  data: ICustomerCreate
+export const loginCustomer = async (
+  data: ICustomerLogin
 ): Promise<{ token: string }> => {
   const customer = await customerRepository.findOneBy({
     email: data.email,

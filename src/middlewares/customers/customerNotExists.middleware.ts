@@ -1,6 +1,6 @@
 import { AppError } from "../../errors/appError";
-import { customerRepository } from "../../utils/repositories";
 import { Request, Response, NextFunction } from "express";
+import { customerRepository } from "../../utils/repositories";
 
 export const verifyCustomerNotExists = async (
   req: Request,
@@ -12,7 +12,7 @@ export const verifyCustomerNotExists = async (
   });
 
   if (customer) {
-    throw new AppError("Contact already exists", 400);
+    throw new AppError("Customer already exists", 400);
   }
 
   return next();

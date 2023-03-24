@@ -1,17 +1,22 @@
 import { Request, Response } from "express";
+import * as services from "../../services";
 
 export const listAllContactsController = async (
   req: Request,
   res: Response
 ) => {
-  const info = "";
+  const info = await services.listAllContacts();
 
   return res.status(200).json(info);
 };
 
-export const listContactsController = async (req: Request, res: Response) => {
-  const customerId = req.user.id;
-  const info = "";
+export const listContactsCustomerController = async (
+  req: Request,
+  res: Response
+) => {
+  const data = req.user.id;
+
+  const info = await services.listContactsByCustomer(data);
 
   return res.status(200).json(info);
 };

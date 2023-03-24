@@ -1,34 +1,23 @@
-import { z } from "zod";
 import { customerReturn } from "./../customers/customers.schema";
-
-export const contactReturn = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
-
-  customer: z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string(),
-    phone: z.string(),
-    created_at: z.string(),
-    updated_at: z.string(),
-  }),
-});
+import { z } from "zod";
 
 export const contactCreate = z.object({
   name: z.string(),
   email: z.string(),
   phone: z.string(),
-  password: z.string(),
 });
 
-export const contactUpdate = z.object({
-  name: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  password: z.string(),
+export const contactReturn = contactCreate.extend({
+  id: z.string(),
+  isActive: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  customerId: z.string().optional(),
+  customer: customerReturn.omit({ contacts: true, customerId: true }),
 });
+
+export const contactUpdate = contactCreate.partial();
+export const contactArray = contactReturn.array();
+export const contactArrayOmitCustomer = contactReturn
+  .omit({ customer: true })
+  .array();

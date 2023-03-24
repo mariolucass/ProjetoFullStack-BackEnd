@@ -1,14 +1,12 @@
 import { AppError } from "./../../errors";
-import { contactRepository } from "../../utils/repositories";
+import { customerRepository } from "../../utils/repositories";
 
 export const deleteCustomer = async (customerId: string): Promise<void> => {
-  const contact = await contactRepository.findOneByOrFail({
+  const customer = await customerRepository.findOneByOrFail({
     id: customerId,
   });
 
-  if (!contact.isActive) {
+  if (!customer.isActive) {
     throw new AppError("Contact already inactive", 400);
   }
-
-  //   const returnContacts = await contactReturn.parse(contacts);
 };

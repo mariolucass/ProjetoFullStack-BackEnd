@@ -1,12 +1,14 @@
+import z from "zod";
 import { Customer } from "../../entities";
-import { DeepPartial, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import * as schemas from "../../schemas";
 
-export type ICustomerUpdate = DeepPartial<Customer>;
+export type ICustomerRequest = z.infer<typeof schemas.customerCreate>;
+
+export type ICustomerReturn = z.infer<typeof schemas.customerReturn>;
+
+export type ICustomerUpdate = z.infer<typeof schemas.customerUpdate>;
+
+export type ICustomerArray = z.infer<typeof schemas.customerArray>;
+
 export type ICustomer = Repository<Customer>;
-
-export interface ICustomerCreate {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-}

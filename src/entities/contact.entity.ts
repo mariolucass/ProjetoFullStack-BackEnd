@@ -25,11 +25,11 @@ export class Contact {
   @Column({ default: true })
   isActive: boolean;
 
-  @CreateDateColumn()
-  createdAt: Date | string;
+  @CreateDateColumn({ type: "date" })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updatedAt: Date | string;
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: string;
 
   @ManyToOne(() => Customer, (customer) => customer.contacts)
   customer: Customer;

@@ -1,24 +1,23 @@
-import { Customer } from "../../entities";
-import { AppError } from "./../../errors";
-import { ICustomerUpdate } from "./../../interface";
+import { customerReturn } from "./../../schemas";
 import { customerRepository } from "../../utils/repositories";
+import { ICustomerUpdate, ICustomerReturn } from "./../../interface";
 
 export const updateCustomer = async (
   customerId: string,
   data: ICustomerUpdate
-): Promise<Customer> => {
+): Promise<ICustomerReturn> => {
   const customer = await customerRepository.findOneByOrFail({
     id: customerId,
   });
 
   const customerUpdated = customerRepository.create({
-    ...customer,
     ...data,
+    ...customer,
   });
 
   await customerRepository.save(customerUpdated);
 
-  return customer;
+  const returnCustomer = customerReturn.parse(customerUpdated);
 
-  //   const returnContacts = await contactReturn.parse(contacts);
+  return returnCustomer;
 };

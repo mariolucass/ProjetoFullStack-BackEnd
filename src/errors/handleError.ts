@@ -15,6 +15,7 @@ export const errorHandler = async (
   }
 
   if (error instanceof ZodError) {
+    console.log(error);
     return res.status(400).json({ message: error.flatten().fieldErrors });
   }
 
