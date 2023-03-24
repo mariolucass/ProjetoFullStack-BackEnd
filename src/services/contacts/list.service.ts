@@ -7,7 +7,11 @@ import {
 } from "./../../schemas";
 
 export const listAllContacts = async (): Promise<IContactArray> => {
-  const contacts = await contactRepository.find();
+  const contacts = await contactRepository.find({
+    relations: {
+      customer: true,
+    },
+  });
 
   const returnContacts = contactArray.parse(contacts);
 

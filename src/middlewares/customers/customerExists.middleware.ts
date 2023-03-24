@@ -11,9 +11,9 @@ export const verifyCustomerExists = async (
     id: req.params.id,
   });
 
-  if (!customer) {
-    throw new AppError("Customer not found", 404);
+  if (customer) {
+    return next();
   }
 
-  return next();
+  throw new AppError("Customer not found", 404);
 };

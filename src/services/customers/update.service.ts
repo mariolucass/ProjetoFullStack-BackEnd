@@ -11,8 +11,8 @@ export const updateCustomer = async (
   });
 
   const customerUpdated = customerRepository.create({
-    ...data,
     ...customer,
+    ...data,
   });
 
   await customerRepository.save(customerUpdated);

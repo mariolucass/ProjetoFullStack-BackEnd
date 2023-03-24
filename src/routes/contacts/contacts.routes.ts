@@ -8,6 +8,7 @@ export const contactRoutes = Router();
 contactRoutes.post(
   "/",
   middlewares.verifyAuthPermissions,
+  middlewares.verifyEmailContactNotExists,
   middlewares.validateSchemaMiddleware(contactsSchemas.contactCreate),
   controllers.createContactController
 );
@@ -22,15 +23,17 @@ contactRoutes.get(
   "/:id",
   middlewares.verifyAuthPermissions,
   middlewares.verifyContactOwner,
-  middlewares.verifyContactExists
+  middlewares.verifyContactExists,
+  controllers.listContactsByIdController
 );
 
 contactRoutes.patch(
   "/:id",
-  middlewares.verifyAuthPermissions,
   middlewares.verifyContactExists,
+  middlewares.verifyEmailContactNotExists,
+  middlewares.verifyAuthPermissions,
+  middlewares.validateSchemaMiddleware(contactsSchemas.contactUpdateRequest),
   middlewares.verifyContactOwner,
-  middlewares.validateSchemaMiddleware(contactsSchemas.contactUpdate),
   controllers.updateContactController
 );
 

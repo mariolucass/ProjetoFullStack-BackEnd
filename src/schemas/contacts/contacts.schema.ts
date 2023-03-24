@@ -16,7 +16,9 @@ export const contactReturn = contactCreate.extend({
   customer: customerReturn.omit({ contacts: true, customerId: true }),
 });
 
-export const contactUpdate = contactCreate.partial();
+export const contactUpdateRequest = contactCreate.partial();
+export const contactUpdate = contactCreate.partial().required();
+
 export const contactArray = contactReturn.array();
 export const contactArrayOmitCustomer = contactReturn
   .omit({ customer: true })

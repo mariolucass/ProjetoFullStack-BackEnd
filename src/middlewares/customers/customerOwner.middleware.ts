@@ -6,7 +6,7 @@ export const verifyCustomerOwner = async (
   res: Response,
   next: NextFunction
 ) => {
-  if (req.user.id == req.params.id) {
+  if (req.user.id === req.params.id) {
     return next();
   }
 

@@ -7,9 +7,18 @@ export const verifyContactOwner = async (
   res: Response,
   next: NextFunction
 ) => {
-  const contact = await contactRepository.findOneByOrFail({
-    id: req.params.id,
+  const contact = await contactRepository.findOne({
+    where: {
+      id: req.params.id,
+    },
+    relations: {
+      customer: true,
+    },
   });
+
+  if (!contact) {
+    throw new AppError("Contact not found", 404);
+  }
 
   if (req.user.id === contact.customer.id) {
     return next();

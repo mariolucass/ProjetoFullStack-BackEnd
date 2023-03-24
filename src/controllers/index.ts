@@ -6,6 +6,7 @@ export {
 export {
   listAllContactsController,
   listContactsCustomerController,
+  listContactsByIdController,
 } from "./contacts/list.controller";
 export { createContactController } from "./contacts/create.controller";
 export { updateContactController } from "./contacts/update.controller";

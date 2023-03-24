@@ -27,10 +27,11 @@ customerRoutes.get(
 
 customerRoutes.patch(
   "/:id",
-  middlewares.verifyAuthPermissions,
   middlewares.verifyCustomerExists,
+  middlewares.verifyEmailCustomerNotExists,
+  middlewares.verifyAuthPermissions,
+  middlewares.validateSchemaMiddleware(customersSchemas.customerUpdateRequest),
   middlewares.verifyCustomerOwner,
-  middlewares.validateSchemaMiddleware(customersSchemas.customerUpdate),
   controllers.updateCustomerController
 );
 

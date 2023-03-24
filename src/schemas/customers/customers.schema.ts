@@ -26,5 +26,6 @@ export const customerReturn = customerCreate
   })
   .omit({ password: true });
 
-export const customerUpdate = customerCreate.partial();
+export const customerUpdateRequest = customerCreate.partial();
+export const customerUpdate = customerCreate.partial().required();
 export const customerArray = customerReturn.array();

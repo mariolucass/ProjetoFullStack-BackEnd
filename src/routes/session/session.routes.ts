@@ -10,6 +10,6 @@ sessionRoutes.post("/login", controllers.loginCustomerController);
 sessionRoutes.post(
   "/register",
   middlewares.validateSchemaMiddleware(customersSchemas.customerCreate),
-  middlewares.verifyCustomerNotExists,
+  middlewares.verifyEmailCustomerNotExists,
   controllers.registerCustomerController
 );

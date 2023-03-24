@@ -1,15 +1,17 @@
 export { customerLogin } from "./session/session.schema";
 
 export {
+  contactUpdate,
+  contactUpdateRequest,
   contactCreate,
   contactReturn,
-  contactUpdate,
   contactArray,
   contactArrayOmitCustomer,
 } from "./contacts/contacts.schema";
 
 export {
   customerUpdate,
+  customerUpdateRequest,
   customerCreate,
   customerReturn,
   customerArray,
