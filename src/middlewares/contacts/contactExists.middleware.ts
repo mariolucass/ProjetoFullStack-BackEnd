@@ -11,7 +11,7 @@ export const verifyContactExists = async (
     id: req.params.id,
   });
 
-  if (!contact) {
+  if (!contact || !contact.isActive) {
     throw new AppError("Contact not found", 404);
   }
 

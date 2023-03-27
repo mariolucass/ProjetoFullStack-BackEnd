@@ -35,7 +35,10 @@ export const listContactsByCustomer = async (
 export const listContactsById = async (
   contactId: string
 ): Promise<IContactReturn> => {
-  const contact = await contactRepository.findOneByOrFail({ id: contactId });
+  const contact = await contactRepository.findOne({
+    where: { id: contactId },
+    relations: { customer: true },
+  });
 
   const returnContacts = contactReturn.parse(contact);
 

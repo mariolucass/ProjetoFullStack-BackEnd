@@ -15,6 +15,7 @@ export { deleteContactController } from "./contacts/delete.controller";
 export {
   listAllCustomersController,
   listCustomerController,
+  listProfileController,
 } from "./customers/list.controller";
 export { updateCustomerController } from "./customers/update.controller";
 export { deleteCustomerController } from "./customers/delete.controller";

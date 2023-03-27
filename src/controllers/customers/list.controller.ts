@@ -16,3 +16,10 @@ export const listCustomerController = async (req: Request, res: Response) => {
 
   return res.status(200).json(info);
 };
+
+export const listProfileController = async (req: Request, res: Response) => {
+  const data = req.user.id;
+  const info = await services.listCustomerById(data);
+
+  return res.status(200).json(info);
+};

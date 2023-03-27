@@ -12,7 +12,7 @@ export const loginCustomer = async (
     email: data.email,
   });
 
-  if (!customer) {
+  if (!customer || !customer.isActive) {
     throw new AppError("User or password invalid", 403);
   }
 

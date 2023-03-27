@@ -18,9 +18,14 @@ customerRoutes.get(
 );
 
 customerRoutes.get(
+  "/profile",
+  middlewares.verifyAuthPermissions,
+  controllers.listProfileController
+);
+
+customerRoutes.get(
   "/:id",
   middlewares.verifyAuthPermissions,
-
   middlewares.verifyCustomerExists,
   controllers.listCustomerController
 );
